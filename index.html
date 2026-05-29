@@ -1,0 +1,302 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikGrab - TikTok Downloader Tanpa Watermark</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons untuk ikon yang modern -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+        }
+
+        .tiktok-gradient-text {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tiktok-btn-gradient {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            transition: all 0.3s ease;
+        }
+
+        .tiktok-btn-gradient:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 0 20px rgba(37, 244, 238, 0.4);
+        }
+
+        .glassmorphism {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="text-gray-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-gray-800 glassmorphism sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Logo buatan sendiri dengan SVG -->
+                <svg class="w-8 h-8 text-[#FE2C55]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.02 1.59 4.23.95 1.15 2.27 1.95 3.72 2.27.01 1.33.02 2.66-.02 3.99-1.39-.02-2.73-.52-3.83-1.37-.28-.21-.54-.45-.78-.71-.01 2.91.01 5.82-.02 8.73-.02 1.36-.37 2.72-1.03 3.92-1.03 1.91-2.95 3.25-5.11 3.65-1.95.39-4.04.1-5.83-.82-2-1.04-3.35-3.13-3.55-5.39-.24-2.42.79-4.82 2.69-6.33 1.63-1.34 3.79-1.9 5.89-1.57.01 1.4.01 2.8 0 4.2-1.12-.24-2.31-.03-3.27.6-.96.61-1.57 1.68-1.63 2.81-.08 1.45.86 2.83 2.23 3.25 1.15.38 2.45.1 3.39-.68.74-.59 1.15-1.5 1.16-2.44-.02-4.14-.01-8.28-.02-12.42z"/>
+                </svg>
+                <span class="text-2xl font-extrabold tracking-wider text-white">Tik<span class="text-[#25F4EE]">Grab</span></span>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#downloader" class="hover:text-[#25F4EE] transition">Downloader</a>
+                <a href="#fitur" class="hover:text-[#FE2C55] transition">Fitur</a>
+                <a href="#faq" class="hover:text-[#25F4EE] transition">FAQ</a>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <span class="px-3 py-1 bg-green-500/10 text-green-400 text-xs font-semibold rounded-full border border-green-500/20 flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-ping"></span> Online
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-12">
+        
+        <!-- Hero Section & Downloader -->
+        <section id="downloader" class="text-center space-y-8 mb-16">
+            <div class="space-y-4 max-w-3xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                    TikTok Video Downloader <br>
+                    <span class="tiktok-gradient-text">Tanpa Watermark</span>
+                </h1>
+                <p class="text-gray-400 md:text-lg">
+                    Unduh video TikTok favorit Anda dengan kualitas tinggi (HD) dan format MP3 secara gratis, cepat, dan tanpa batas.
+                </p>
+            </div>
+
+            <!-- Input Form Box -->
+            <div class="max-w-3xl mx-auto p-4 md:p-6 rounded-3xl glassmorphism shadow-2xl relative overflow-hidden group">
+                <div class="absolute -top-24 -left-24 w-48 h-48 bg-[#25F4EE]/10 rounded-full blur-3xl group-hover:bg-[#25F4EE]/15 transition duration-500"></div>
+                <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-[#FE2C55]/10 rounded-full blur-3xl group-hover:bg-[#FE2C55]/15 transition duration-500"></div>
+
+                <form id="downloadForm" class="relative z-10 space-y-4">
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <div class="relative flex-grow">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
+                                <i data-lucide="link"></i>
+                            </div>
+                            <input 
+                                type="url" 
+                                id="tiktokUrl" 
+                                placeholder="Tempel tautan video TikTok di sini (misal: https://vt.tiktok.com/...)" 
+                                required
+                                class="w-full pl-12 pr-24 py-4 bg-gray-900/80 border border-gray-700/60 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#25F4EE] focus:border-transparent text-white transition placeholder-gray-500 text-sm md:text-base"
+                            >
+                            <button 
+                                type="button" 
+                                id="btnPaste" 
+                                class="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-xs font-semibold rounded-lg text-gray-300 transition flex items-center gap-1"
+                            >
+                                <i data-lucide="clipboard" class="w-3.5 h-3.5"></i> Tempel
+                            </button>
+                        </div>
+                        <button 
+                            type="submit" 
+                            id="btnSubmit" 
+                            class="tiktok-btn-gradient px-8 py-4 rounded-2xl font-bold text-white flex items-center justify-center gap-2 shadow-lg shadow-[#FE2C55]/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-[#FE2C55] transition"
+                        >
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            <span>Unduh</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Pesan Error / Informasi -->
+            <div id="statusMessage" class="hidden max-w-3xl mx-auto p-4 rounded-2xl text-sm transition-all duration-300"></div>
+
+            <!-- Loader / Loading State -->
+            <div id="loader" class="hidden flex-col items-center justify-center space-y-4 py-12">
+                <div class="relative w-16 h-16">
+                    <div class="absolute inset-0 rounded-full border-4 border-t-[#25F4EE] border-r-transparent border-b-[#FE2C55] border-l-transparent animate-spin"></div>
+                </div>
+                <p class="text-gray-400 font-medium animate-pulse">Sedang menganalisis tautan video...</p>
+            </div>
+
+            <!-- Results Section (Hidden by Default) -->
+            <div id="resultCard" class="hidden max-w-4xl mx-auto p-6 md:p-8 rounded-3xl glassmorphism text-left space-y-6 animate-fade-in">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <!-- Preview Video -->
+                    <div class="w-full md:w-2/5 aspect-[9/16] max-h-[500px] rounded-2xl overflow-hidden bg-black border border-gray-800 flex items-center justify-center relative">
+                        <video id="videoPreview" controls class="w-full h-full object-cover">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <!-- Video Details & Actions -->
+                    <div class="w-full md:w-3/5 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <!-- Pembuat Konten -->
+                            <div class="flex items-center space-x-3">
+                                <img id="authorAvatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100&q=80" alt="Avatar" class="w-12 h-12 rounded-full border border-gray-700 object-cover">
+                                <div>
+                                    <h3 id="authorName" class="font-bold text-white leading-tight">@username</h3>
+                                    <p id="authorNick" class="text-xs text-gray-400">Nama Panggilan</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Deskripsi Video -->
+                            <p id="videoTitle" class="text-gray-300 text-sm md:text-base leading-relaxed line-clamp-3">
+                                Deskripsi video TikTok akan muncul di sini secara otomatis setelah proses analisis tautan berhasil.
+                            </p>
+
+                            <!-- Statistik Video -->
+                            <div class="grid grid-cols-3 gap-3 pt-2">
+                                <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-gray-500 text-xs block mb-1 flex items-center justify-center gap-1"><i data-lucide="heart" class="w-3.5 h-3.5 text-[#FE2C55]"></i> Suka</span>
+                                    <span id="statLikes" class="font-bold text-white text-sm">0</span>
+                                </div>
+                                <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-gray-500 text-xs block mb-1 flex items-center justify-center gap-1"><i data-lucide="message-circle" class="w-3.5 h-3.5 text-[#25F4EE]"></i> Komen</span>
+                                    <span id="statComments" class="font-bold text-white text-sm">0</span>
+                                </div>
+                                <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 text-center">
+                                    <span class="text-gray-500 text-xs block mb-1 flex items-center justify-center gap-1"><i data-lucide="share-2" class="w-3.5 h-3.5 text-blue-400"></i> Bagikan</span>
+                                    <span id="statShares" class="font-bold text-white text-sm">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tombol Download -->
+                        <div class="space-y-3">
+                            <a id="btnDownloadNoWatermark" href="#" target="_blank" class="w-full py-4 px-6 bg-[#25F4EE] hover:bg-[#20d3cd] text-black font-bold rounded-2xl flex items-center justify-center gap-2 transition shadow-lg shadow-[#25F4EE]/10">
+                                <i data-lucide="film"></i>
+                                <span>Unduh Video (Tanpa Watermark)</span>
+                            </a>
+                            <a id="btnDownloadWatermark" href="#" target="_blank" class="w-full py-3 px-6 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition border border-gray-700">
+                                <i data-lucide="video"></i>
+                                <span>Unduh Video (Dengan Watermark)</span>
+                            </a>
+                            <a id="btnDownloadAudio" href="#" target="_blank" class="w-full py-3 px-6 bg-gray-900 hover:bg-gray-850 text-gray-300 hover:text-white font-semibold rounded-2xl flex items-center justify-center gap-2 transition border border-gray-800">
+                                <i data-lucide="music"></i>
+                                <span>Unduh Musik MP3</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fitur Section -->
+        <section id="fitur" class="py-12 border-t border-gray-800/80 space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl font-extrabold text-white">Kenapa Memilih TikGrab?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Kami menyediakan layanan terbaik untuk menyimpan video TikTok favorit Anda tanpa kendala.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800/60 hover:border-[#25F4EE]/40 transition duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#25F4EE]/10 flex items-center justify-center text-[#25F4EE]">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Tanpa Watermark</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Unduh video dalam keadaan bersih total tanpa adanya logo TikTok melayang yang mengganggu visual konten Anda.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800/60 hover:border-[#FE2C55]/40 transition duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-[#FE2C55]/10 flex items-center justify-center text-[#FE2C55]">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Sangat Cepat & Mudah</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Hanya butuh sekali klik saja. Tempel link, klik unduh, dan video Anda siap disimpan dalam hitungan detik.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 rounded-2xl bg-gray-900/40 border border-gray-800/60 hover:border-purple-500/40 transition duration-300 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+                        <i data-lucide="smartphone"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Kompatibel Semua Gadget</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Berfungsi lancar di ponsel Android, iPhone, tablet, hingga PC desktop tanpa perlu memasang aplikasi tambahan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cara Unduh Section -->
+        <section class="py-12 border-t border-gray-800/80 space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl font-extrabold text-white">Cara Mengunduh Video TikTok</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Ikuti 3 langkah mudah ini untuk menyimpan video apa saja langsung ke galeri Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-gray-800 text-white flex items-center justify-center font-bold text-lg border border-gray-700">1</div>
+                    <h4 class="font-bold text-white">Salin Tautan Video</h4>
+                    <p class="text-gray-400 text-xs max-w-xs">Buka aplikasi TikTok, ketuk tombol "Bagikan" lalu pilih opsi "Salin Tautan".</p>
+                </div>
+                <div class="flex flex-col items-center text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-gray-800 text-white flex items-center justify-center font-bold text-lg border border-gray-700">2</div>
+                    <h4 class="font-bold text-white">Tempel Tautan</h4>
+                    <p class="text-gray-400 text-xs max-w-xs">Kembali ke TikGrab, tempel tautan yang disalin ke kolom input di atas.</p>
+                </div>
+                <div class="flex flex-col items-center text-center space-y-3">
+                    <div class="w-12 h-12 rounded-full bg-gray-800 text-white flex items-center justify-center font-bold text-lg border border-gray-700">3</div>
+                    <h4 class="font-bold text-white">Unduh Video</h4>
+                    <p class="text-gray-400 text-xs max-w-xs">Ketuk tombol "Unduh" dan pilih format kualitas video atau MP3 yang Anda inginkan.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-12 border-t border-gray-800/80 space-y-8">
+            <div class="text-center space-y-4">
+                <h2 class="text-3xl font-extrabold text-white">Pertanyaan Sering Diajukan (FAQ)</h2>
+                <p class="text-gray-400">Semua yang perlu Anda ketahui tentang layanan kami.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ 1 -->
+                <div class="bg-gray-900/30 border border-gray-800 rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:bg-gray-900/50 transition duration-200 faq-btn">
+                        <span>Apakah saya harus membayar untuk mengunduh video?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed">
+                        Tidak, layanan ini 100% gratis dan tidak membutuhkan biaya pendaftaran atau batasan kuota harian. Anda bebas mengunduh video sebanyak yang Anda mau!
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="bg-gray-900/30 border border-gray-800 rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:bg-gray-900/50 transition duration-200 faq-btn">
+                        <span>Di mana hasil unduhan video disimpan?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed">
+                        Biasanya video otomatis tersimpan di folder "Downloads" atau "Unduhan" bawaan dari sistem operasi perangkat Anda (Windows, macOS, Android, atau iOS).
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-gray-900/30 border border-gray-800 rounded-2xl overflow-hidden">
+                    <button class="w-full px-6 py-5 text-left font-bold text-white flex justify-between items-center focus:outline-none hover:bg-gray-900/50 transition duration-200 faq-btn">
+                        <span>Apakah TikGrab menyimpan riwayat video saya?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 transform transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-gray-400 text-sm leading-relaxed">
+                        Kami sangat menjaga privasi Anda. Kami tidak menyimpan riwayat unduhan ma
